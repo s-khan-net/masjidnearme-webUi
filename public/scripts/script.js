@@ -1003,8 +1003,16 @@ function verifyMasjid() {
     });
     $('#loader').show();
     masjid.verified = true;
-    masjid.masjidModifiedby = sessionStorage.getItem('userEmail')
-    masjid.notMasjid = $('#chkIsNotMasjid').is(':checked')
+    masjid.masjidModifiedby = sessionStorage.getItem('userEmail');
+    masjid.notMasjid = $('#chkIsNotMasjid').is(':checked');
+    masjid.masjidAddress.description = $('#description').val();
+    masjid.masjidAddress.street = $('#street').val();
+    masjid.masjidAddress.zipcode = $('#zipcode').val();
+    masjid.masjidAddress.country = $('#country').val();
+    masjid.masjidAddress.state = $('#state').val();
+    masjid.masjidAddress.city = $('#city').val();
+    masjid.masjidAddress.locality = $('#locality').val();
+    masjid.masjidAddress.phone = $('#phone').val();
     let masjidObj = {
         masjid: masjid,
         type: "verifyMasjid"
