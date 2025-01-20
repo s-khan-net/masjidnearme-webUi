@@ -3,7 +3,7 @@ var markers = [];
 var basePath = 'https://api.masjidnear.me/v1/'
 var locMarker;
 $(document).ready(function () {
-    
+
     checkInitStuff();
     $('#btnRegister').click(function (e) {
         if (e) {
@@ -99,6 +99,24 @@ $(document).ready(function () {
             $('#notMasjidMessage').hide();
         }
     })
+
+    //#region sign in show hide
+    $('#btnReg').click(function () {
+        $('#loginFrm').prop('hidden', true);
+        $('#registerFrm').prop('hidden', false);
+        $('#loginModalTitle').html('Sign Up');
+    });
+    $('#btnlogin').click(function () {
+        $('#loginFrm').prop('hidden', false);
+        $('#registerFrm').prop('hidden', true);
+        $('#loginModalTitle').html('Sign In');
+    });
+    $('#btnForgotPwd').click(function () {
+        $('#loginContent').html('');
+        $('#loginModal').modal('hide');
+        showForgotPwd();
+    });
+    //#endregion
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('public/scripts/sw.js');
     }
@@ -108,14 +126,14 @@ $(document).ready(function () {
 });
 //#region iniit methods
 function checkInitStuff() {
-	if(window.innerWidth < 400) {
-		$('#timings').css('zoom','74%')
-	}
+    if (window.innerWidth < 400) {
+        $('#timings').css('zoom', '74%')
+    }
     checkUserLoggedIn();
-	setTimeout(() => {
-		$('[data-toggle="tooltip"]').tooltip();
-    	$('.clockpicker').clockpicker();
-	}, 500);
+    setTimeout(() => {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('.clockpicker').clockpicker();
+    }, 500);
 }
 function checkUserLoggedIn(user) {
     if (user) {
@@ -214,7 +232,7 @@ function signOut(msg) {
         showAlert(msg, 5000);
         clearMarkers(true)
     } catch (error) {
-        showAlert('There was an error while trying to signing out.')
+        console.error(`There was an error while trying to signing out -> ${error}`)
     }
 
 }
@@ -448,23 +466,7 @@ function getInfo(masjid) {
     return contentStr
 }
 
-//#region sign in show hide
-$('#btnReg').click(function () {
-    $('#loginFrm').prop('hidden', true);
-    $('#registerFrm').prop('hidden', false);
-    $('#loginModalTitle').html('Sign Up');
-});
-$('#btnlogin').click(function () {
-    $('#loginFrm').prop('hidden', false);
-    $('#registerFrm').prop('hidden', true);
-    $('#loginModalTitle').html('Sign In');
-});
-$('#btnForgotPwd').click(function () {
-    $('#loginContent').html('');
-    $('#loginModal').modal('hide');
-    showForgotPwd();
-});
-//#endregion
+
 
 //#region  sign in & sign up methods
 function signIn() {
