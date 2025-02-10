@@ -111,7 +111,41 @@ function checkInitStuff() {
 	if(window.innerWidth < 400) {
 		$('#timings').css('zoom','74%')
 	}
+    if(window.location.href.indexOf('code') > -1){
+        let code = window.location.href.split('code=')[1]
+        if(code){
+            $.ajax({
+                method: 'POST',
+                url: `${basePath}users/verify/${code}`,
+                contentType: 'application/json',
+                dataType: "json",
+                success: function (data) {
+                    if (data && data.user) {
+                        try {
+                            setLoginUi(data.user);
+                            showAlert(data.message, 5000);
+                        } catch (error) {
+                            showAlert('An <b>fatal error</b> has occured after signing you in<br>We had to sign you out. Please try refreshing the page');
+                        }
+                    }
+                    else {
+                        signOut();
+                    }
+                },
+                error: function (errordata) {
+                    if (errordata.state() == 'rejected' && errordata.readyState == 0) {
+                        showAlert('Looks like we could not connect to the server/database at this time<br> Please try again later');
+                    }
+                    else {
+                        signOut()
+                    }
+                }
+            });
+        }
+    }
+    else {
     checkUserLoggedIn();
+    }
 	setTimeout(() => {
 		$('[data-toggle="tooltip"]').tooltip();
     	$('.clockpicker').clockpicker();
