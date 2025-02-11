@@ -134,14 +134,24 @@ function checkInitStuff() {
         if(code){
             $.ajax({
                 method: 'POST',
-                url: `${basePath}users/verify/${code}`,
+                url: `${basePath}users/verify`,
                 contentType: 'application/json',
+                data: JSON.stringify({ verificationCode: code }),
                 dataType: "json",
-                success: function (data) {
+                success: function (data, status, request) {
+                    let token = request.getResponseHeader('x-auth-token')
+                    if (token) {
+                        showAlert(data.message, 5000);
+                        //store the token in cookie
+                        $.cookie('token', token);
+                        //store the token in session
+                        sessionStorage.setItem('token', token);
+                    }
                     if (data && data.user) {
                         try {
                             setLoginUi(data.user);
-                            showAlert(data.message, 5000);
+                            const n = "مسجد" + " near me";
+                            showAlert(`Welcome to ${n}<br>Your email is verified.<br>${data.message}`, 6000);
                         } catch (error) {
                             showAlert('An <b>fatal error</b> has occured after signing you in<br>We had to sign you out. Please try refreshing the page');
                         }
@@ -522,6 +532,7 @@ function signIn() {
     }
     if (!res.valid) {
         showSignError(res);
+        $('#loader').hide();
         return;
     }
     $.ajax({
@@ -585,6 +596,7 @@ function signUp(e) {
     const res = validateUser(user.user);
     if (!res.valid) {
         showSignError(res);
+        $('#loader').hide();
         return;
     }
     $.ajax({
@@ -825,7 +837,7 @@ function showerr(exep) {
     $('.alert').show();
 }
 function showAlert(msg, delay) {
-    if (msg) {
+    if (msg && !$("#loader").is(':visible')) {
         $('#loader').hide();
         $('#alertMsg').html('<a class="close" onclick=$("#alertMsg").html("").hide()>&times;</a>' + msg);
         $('#alertMsg').addClass('alert alert-masjid fade in')
@@ -1088,7 +1100,7 @@ function saveSettings() {
     settings.school = $("input[name='school'][value='1']").prop('checked') ? 1 : 0;
     settings.calcMethod = $('#calcMethod').val();
     settings.radius = $('#searchRadius').val();
-    getUserByToken(token, settings)
+    getUserByToken(token, settings, null)
 
 }
 function saveProfile() {
