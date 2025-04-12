@@ -19,15 +19,31 @@ textarea {
 }
 
 .alert-masjid {
-  background: -webkit-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
-  background: -o-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
-  background: -moz-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
-  background: linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
+  background: -o-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
   cursor: default;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.77);
 }
 
-.alert-masjid>div {
+.alert-masjid > div {
   color: #666666;
 }
 
@@ -51,19 +67,34 @@ textarea {
 }
 
 .masjid-icon {
-  background: -webkit-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
-  background: -o-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
-  background: -moz-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
-  background: linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%);
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
+  background: -o-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  );
 }
-
 
 .boxx {
   background-color: #fff;
 }
 
 .infoWTimes {
-  color: #17603A;
+  color: #17603a;
   border-radius: 3px;
 }
 
@@ -80,31 +111,59 @@ textarea {
   background-color: darkgreen;
   color: #fff;
   width: 70%;
-
 }
 
 .btn-masajid {
-  background: -webkit-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%) !important;
-  background: -o-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%) !important;
-  background: -moz-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%) !important;
-  background: linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%) !important;
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  ) !important;
+  background: -o-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  ) !important;
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  ) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  ) !important;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.77);
   border-radius: 4px;
-  color: #17603A;
+  color: #17603a;
 }
 
 .btn-masajid:hover {
-  background: -webkit-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%) !important;
-  background: -o-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%) !important;
-  background: -moz-linear-gradient(180deg, rgba(180, 240, 223, 1) 0%, rgba(255, 245, 245, 1) 100%) !important;
-  background: linear-gradient(180deg, rgba(255, 245, 245, 1) 100%) rgba(180, 240, 223, 1) 0% !important;
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  ) !important;
+  background: -o-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  ) !important;
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(180, 240, 223, 1) 0%,
+    rgba(255, 245, 245, 1) 100%
+  ) !important;
+  background: linear-gradient(180deg, rgba(255, 245, 245, 1) 100%)
+    rgba(180, 240, 223, 1) 0% !important;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.77);
   border-radius: 4px;
-  color: #17603A;
+  color: #17603a;
 }
 
 .infoWTimes {
-  color: #17603A;
+  color: #17603a;
   border-radius: 3px;
   font-family: verdana;
   text-align: center;
@@ -127,19 +186,38 @@ textarea {
 }
 .masjid-info-popup-header {
   text-align: center;
-    padding-bottom: 5px;
-    font-size: 13px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 82% !important;
-    /* margin-left: 15px; */
+  padding-bottom: 5px;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 82% !important;
+  /* margin-left: 15px; */
+}
+.loader {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #095b2e;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* CSP overrides :( */
-.btn-loc{
-  cursor:default
+.btn-loc {
+  cursor: default;
 }
-.btn-loc:hover{
-  color:#ef5350 !important
+.btn-loc:hover {
+  color: #ef5350 !important;
 }
