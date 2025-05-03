@@ -126,12 +126,12 @@ $(document).ready(function () {
 });
 //#region iniit methods
 function checkInitStuff() {
-	if(window.innerWidth < 400) {
-		$('#timings').css('zoom','74%')
-	}
-    if(window.location.href.indexOf('code') > -1){
+    if (window.innerWidth < 400) {
+        $('#timings').css('zoom', '74%')
+    }
+    if (window.location.href.indexOf('code') > -1) {
         let code = window.location.href.split('code=')[1]
-        if(code){
+        if (code) {
             $.ajax({
                 method: 'POST',
                 url: `${basePath}users/verify`,
@@ -172,12 +172,12 @@ function checkInitStuff() {
         }
     }
     else {
-    checkUserLoggedIn();
+        checkUserLoggedIn();
     }
-	setTimeout(() => {
-		$('[data-toggle="tooltip"]').tooltip();
-    	$('.clockpicker').clockpicker();
-	}, 500);
+    setTimeout(() => {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('.clockpicker').clockpicker();
+    }, 500);
 }
 function checkUserLoggedIn(user) {
     if (user) {
@@ -608,7 +608,7 @@ function signUp(e) {
         data: JSON.stringify(user),
         success: function (data, status) {
             // alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-            showAlert(JSON.parse(data).message);
+            showAlert(data.message);
             $('#loginModal').modal('hide');
         },
         complete: function (data) {
@@ -837,7 +837,7 @@ function showerr(exep) {
     $('.alert').show();
 }
 function showAlert(msg, delay) {
-    if (msg && !$("#loader").is(':visible')) {
+    if (msg) {
         $('#loader').hide();
         $('#alertMsg').html('<a class="close" onclick=$("#alertMsg").html("").hide()>&times;</a>' + msg);
         $('#alertMsg').addClass('alert alert-masjid fade in')
