@@ -118,7 +118,7 @@ $(document).ready(function () {
     });
     //#endregion
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('public/scripts/sw.js');
+        navigator.serviceWorker.register('sw.js');
     }
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showerror);
@@ -519,7 +519,7 @@ function signIn() {
     var user = {
         "user": {
             "userEmail": $('#userEmail')[0].value.trim(),
-            "userPassword": $('#userPwd')[0].value.trim()
+            "userPassword": btoa($('#userPwd')[0].value.trim())
         }
     };
     if (!user.user.userEmail || !user.user.userPassword) {
@@ -594,6 +594,9 @@ function signUp(e) {
         }
     };
     const res = validateUser(user.user);
+
+    user.user.userPassword = btoa(user.user.userPassword);
+
     if (!res.valid) {
         showSignError(res);
         $('#loader').hide();
