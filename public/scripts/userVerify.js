@@ -1,7 +1,7 @@
 $(document).ready(() => {
     var urlParams = new URLSearchParams(window.location.search);
     var code = urlParams.get('code');
-    var basePath = 'https://masjidnear.me/v1/users/'
+    var basePath = 'https://api.masjidnear.me/v1/users/'
     var u = '';
     if (!code || code.length == 0) {
         showErrorState()
