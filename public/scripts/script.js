@@ -555,8 +555,12 @@ function signIn() {
                 checkUserLoggedIn(data.user);
                 clearMarkers(true);
             }
-            else
-                showAlert('Authorizaton did not come through, <br>Please try again later <br>If this problem persists, please contact our support.')
+            else {
+                if (data && data.status.toLowerCase() == 'error')
+                    showAlert(data.message);
+                else
+                    showAlert('Authorization did not come through, <br>Please try again later <br>If this problem persists, please contact our support.')
+            }
             $('#userEmail').html('')
             $('#loginModal').modal('hide');
         },
