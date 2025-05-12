@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>مسجد near me user verification</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="public/styles/bootstrap.css">
+    <link rel="stylesheet" href="public/styles/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="public/scripts/unsubscribe.js"></script>
+    <script src="public/scripts/bootstrap.js"></script>
+</head>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div style="padding-top:32px;" class="container">
+        <div style="width:75%"><img src="public/assets/images/logo.png" /></div>
+        <div class="well">
+            <fieldset id="verifying">
+                <div class="row">
+                    <div class="col-xs-4 text-right">Enter your registered email:</div>
+                    <div class="col-xs-6"><input type="text" id="txtEmail"/></div>
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-4 text-right">Enter your Password:</div>
+                    <div class="col-xs-6"><input type="password" id="txtQwd"/></div>
+                    <div class="col-xs-2"></div>
+                </div>
+                <div class="row" style="padding-top: 12px;">
+                    <div class="col-xs-5">&nbsp;</div>
+                    <div class="col-xs-2">
+                        <button class="btn-masajid" style="padding: 5px;" id="btnVerify" onclick="verifyEmail()"><span class="loader" id="verifyBtnLoader" style="display: none;"></span>Verify email</button>
+                    </div>
+                    <div class="col-xs-5">&nbsp;</div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>
