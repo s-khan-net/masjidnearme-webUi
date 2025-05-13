@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>مسجد near me user verification</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="public/styles/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="public/scripts/log-reader.js"></script>
+    <style>
+        .msg {
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+                <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+            <![endif]-->
+    <div style="padding-top:32px;" class="container">
+        <div style="width:75%"><img src="public/assets/images/logo.png" /></div>
+        <div class="well">
+            <div style="display: inline-block;">Logs</div>
+            <div id="btnGetLogs" style="display: inline-block;"><span class="glyphicon glyphicon-refresh"></span></div>
+        </div>
+
+    </div>
+    <table id="logTable" class="table table-reponsive" style="font-size: 12px;">
+        <thead>
+            <tr>
+                <th style="width: 11%;">Time</th>
+                <th style="width: 5%;">Level</th>
+                <th style="width: 84%;">Message</th>
+            </tr>
+        </thead>
+        <tbody id="logTableBody">
+            <!-- Log entries will be populated here -->
+        </tbody>
+</body>
+
+</html>

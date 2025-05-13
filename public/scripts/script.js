@@ -244,7 +244,7 @@ function setLoginUi(user) {
             $('#lilogin').hide();
             $('#liUser').show();
             $('#btnLoginUser').prop('title', user.userprofile.firstName);
-            $('#userRole').text(atob(user.role.roleName))
+            $('#userRole').text(btoa(user.role.roleName))
 
             sessionStorage.removeItem('userEmail')
             sessionStorage.removeItem('userSettings')
@@ -424,7 +424,7 @@ function clearMarkers(refresh) {
 
 function getInfo(masjid) {
     const maghrib = $('#timesObject').text();
-    const role = btoa($('#userRole').text())
+    const role = atob($('#userRole').text())
     var contentStr = '<div class="row" >';
     contentStr = contentStr + '<div class="col-xs-11 masjid-info-popup-header" title="' + masjid.masjidName + '"><b>' + masjid.masjidName + '</b></div>';
     contentStr = contentStr + '<div class="col-xs-1" style="margin-left:-5px"><a onmouseover=showShare(event) title="Share" style="cursor:pointer"><span class="glyphicon glyphicon-share"></span></a></div>';
@@ -757,7 +757,7 @@ function showProfile() {
         $('#userProfile_firstName').val(profile.firstName);
         $('#userProfile_lastName').val(profile.lastName);
         $('#userProfile_userPhone').val(profile.phone);
-        $('#role_roleName').val(btoa($('#userRole').text()));
+        $('#role_roleName').val(atob($('#userRole').text()));
         closeAllPopups();
         $('#profileModal').modal({
             backdrop: "static"
