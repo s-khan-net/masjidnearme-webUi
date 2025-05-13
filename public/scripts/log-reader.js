@@ -1,4 +1,4 @@
-var basePath = 'http://localhost:8300/v1/masjids/'
+var basePath = 'https://api.masjidnear.me/v1/'
 $(document).ready(() => {
     $('#btnGetLogs').click(() => {
         getLogs();
