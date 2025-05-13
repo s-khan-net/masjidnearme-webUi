@@ -1,4 +1,4 @@
-var basePath = 'https://api.masjidnear.me/v1/'
+var basePath = 'https://api.masjidnear.me/v1/masjids'
 $(document).ready(() => {
     $('#btnGetLogs').click(() => {
         getLogs();
