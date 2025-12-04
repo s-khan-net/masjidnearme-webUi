@@ -391,8 +391,8 @@ function getMasjids(lt, ln, radius) {
                     items: [],
                 });
                 if (radius < 20000) {
-                    showAlert(`No masjids found within ${radius / 1000} km. Expanding search radius to ${(radius / 1000) + 5} km`, 2500)
-                    getMasjids(lt, ln, radius + 5000)
+                    showAlert(`No masjids found within ${radius / 1000} km. Expanding search radius to ${(radius / 1000) + 3} km`, 2500)
+                    getMasjids(lt, ln, radius + 3000)
                 }
                 else {
                     showAlert('No masjids found', 3000)
