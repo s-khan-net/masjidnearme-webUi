@@ -390,7 +390,13 @@ function getMasjids(lt, ln, radius) {
                 $('#mnu').flmnu({
                     items: [],
                 });
-                showAlert('No masjids found', 3000)
+                if (radius < 10000) {
+                    showAlert(`No masjids found within ${radius / 1000} km. Expanding search radius to ${(radius / 1000) + 3} km`, 2500)
+                    getMasjids(lt, ln, radius + 3000)
+                }
+                else {
+                    showAlert('No masjids found', 3000)
+                }
             }
         },
         complete: function (data) {
