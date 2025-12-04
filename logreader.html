@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="public/styles/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/5.8.10/js/jquery.jqGrid.min.js"
+        integrity="sha512-lF4wkSz1prE7UFIT2LNaekiTUPON4T5cjgjY4unH80bExVIMRvG66+O/hurLs2WicAxK2o2DPwM30ITP+bx5VA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="public/scripts/log-reader.js"></script>
     <style>
         .msg {
@@ -29,17 +32,8 @@
         </div>
 
     </div>
-    <table id="logTable" class="table table-reponsive" style="font-size: 12px;">
-        <thead>
-            <tr>
-                <th style="width: 11%;">Time</th>
-                <th style="width: 5%;">Level</th>
-                <th style="width: 84%;">Message</th>
-            </tr>
-        </thead>
-        <tbody id="logTableBody">
-            <!-- Log entries will be populated here -->
-        </tbody>
+    <table id="list2"></table>
+    <div id="pager2"></div>
 </body>
 
 </html>

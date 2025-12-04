@@ -32,13 +32,37 @@ function showLogs(data) {
     if (data) {
         data.forEach(log => {
             log = JSON.parse(log);
-            $('#logTableBody').append(`
-                <tr>
-                    <td>${log.timestamp}</td>
-                    <td>${log.level}</td>
-                    <td><div class="msg">${log.message}</div></td>
-                </tr>
-            `);
+            ///build jggrid table
+            let data = [{ id: log.timestamp, cell: [log.timestamp, log.level, log.message] }];
+            let count = log.length;
+            let total_pages = 0;
+            if (count > 0) {
+                total_pages = ceil(count / 10);
+            } else {
+                total_pages = 0;
+            }
+            $('#logTable').jqGrid({
+                datatype: "local",
+                data: data,
+                colNames: ['Timestamp', 'Level', 'Message'],
+                colModel: [
+                    { name: 'timestamp', index: 'timestamp', width: 150 },
+                    { name: 'level', index: 'level', width: 100 },
+                    { name: 'message', index: 'message', width: 300 }
+                ],
+                height: 250,
+                rowNum: 10,
+                pager: "#logPager",
+                viewrecords: true,
+                caption: "Logs"
+            });
+            // $('#logTableBody').append(`
+            //     <tr>
+            //         <td>${log.timestamp}</td>
+            //         <td>${log.level}</td>
+            //         <td><div class="msg">${log.message}</div></td>
+            //     </tr>
+            // `);
         });
     } else {
         $('#logTable').append(`
