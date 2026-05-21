@@ -233,12 +233,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="locTitle">Set your location</h4>
+                    <h4 class="modal-title" id="locTitle">Find masjids</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Type in your location </p>
-                    <input type="text" id="txtLocation" class="form-control input-sm" autofocus />
+                    <p>Search for cites, states.... </p>
+                    <input type="text" id="txtLocation" class="form-control input-sm" maxlength="8" autofocus />
+                    <div class="search-results" id="searchResults">
+                        <!-- Search results will be displayed here -->
+                    </div>
                 </div>
+
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-masajid" data-dismiss="modal" onclick="resetLoc()">Submit</button> -->
                 </div>

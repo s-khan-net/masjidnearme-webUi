@@ -2,6 +2,126 @@ var map
 var markers = [];
 var basePath = 'https://api.masjidnear.me/v1/'
 var locMarker;
+
+(function ($) {
+    function escapeHtml(value) {
+        return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    $.fn.masjidSearch = function (options) {
+        var settings = $.extend({
+            apiBase: basePath,
+            resultsContainer: '#searchResults',
+            paramName: 'txt',
+            startsWith: true,
+            minLength: 2,
+            delay: 250,
+            renderItem: function (masjid, index) {
+                var address = masjid.masjidAddress || {};
+                var parts = [];
+                if (address.city) parts.push(address.city);
+                if (address.state) parts.push(address.state);
+                if (address.country) parts.push(address.country);
+                return '<div class="search-result-item" data-result-index="' + index + '">' +
+                    '<div class="search-result-name">' + escapeHtml(masjid.masjidName) + '</div>' +
+                    '<div class="search-result-location">' + escapeHtml(parts.join(', ')) + '</div>' +
+                    '</div>';
+            },
+            onResultClick: function (masjid, $input) {
+                if (masjid && masjid.masjidLocation && Array.isArray(masjid.masjidLocation.coordinates)) {
+                    var lng = masjid.masjidLocation.coordinates[0];
+                    var lat = masjid.masjidLocation.coordinates[1];
+                    if (locMarker && typeof locMarker.setLatLng === 'function') {
+                        locMarker.setLatLng([lat, lng]);
+                    }
+                    if (window.map && typeof window.map.flyTo === 'function') {
+                        window.map.flyTo([lat, lng], 16);
+                    }
+                    clearMarkers(true);
+                }
+                $input.val('');
+                $(settings.resultsContainer).html('');
+                var $modal = $input.closest('.modal');
+                if ($modal.length) {
+                    $modal.modal('hide');
+                }
+            }
+        }, options);
+
+        return this.each(function () {
+            var $input = $(this);
+            var timerId;
+            var results = [];
+
+            function attachResultHandlers() {
+                $(settings.resultsContainer).find('.search-result-item').off('click').on('click', function () {
+                    var index = parseInt($(this).attr('data-result-index'), 10);
+                    if (!isNaN(index) && results[index]) {
+                        settings.onResultClick(results[index], $input);
+                    }
+                });
+            }
+
+            function renderResults(html) {
+                $(settings.resultsContainer).html(html);
+                attachResultHandlers();
+            }
+
+            function renderNoResults() {
+                renderResults('<div class="no-search-results">No matching masjids found.</div>');
+            }
+
+            function renderError() {
+                renderResults('<div class="search-error">Unable to fetch search results. Please try again.</div>');
+            }
+
+            function requestSearch(query) {
+                var url = settings.apiBase.replace(/\/$/, '') +
+                    '/masjids/search?' +
+                    settings.paramName + '=' + encodeURIComponent(query) +
+                    '&startsWith=' + (settings.startsWith ? 'true' : 'false');
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response && response.data && Array.isArray(response.data.masjids) && response.data.masjids.length) {
+                            results = response.data.masjids;
+                            var html = '';
+                            $.each(results, function (idx, masjid) {
+                                html += settings.renderItem(masjid, idx);
+                            });
+                            renderResults(html);
+                        } else {
+                            results = [];
+                            renderNoResults();
+                        }
+                    },
+                    error: function () {
+                        results = [];
+                        renderError();
+                    }
+                });
+            }
+
+            $input.on('input', function () {
+                clearTimeout(timerId);
+                var value = $input.val().trim();
+
+                if (value.length < settings.minLength) {
+                    renderResults('');
+                    return;
+                }
+
+                timerId = setTimeout(function () {
+                    requestSearch(value);
+                }, settings.delay);
+            });
+        });
+    };
+})(jQuery);
+
 $(document).ready(function () {
 
     checkInitStuff();
@@ -117,6 +237,23 @@ $(document).ready(function () {
         showForgotPwd();
     });
     //#endregion
+    $('#txtLocation').masjidSearch({
+        apiBase: basePath,
+        resultsContainer: '#searchResults',
+        minLength: 2,
+        delay: 250,
+        renderItem: function (masjid, index) {
+            var address = masjid.masjidAddress || {};
+            var parts = [];
+            if (address.city) parts.push(address.city);
+            if (address.state) parts.push(address.state);
+            if (address.country) parts.push(address.country);
+            return '<div class="search-result-item" data-result-index="' + index + '">' +
+                '<div class="search-result-name">' + (masjid.masjidName || '') + '</div>' +
+                '<div class="search-result-location">' + parts.join(', ') + '</div>' +
+                '</div>';
+        }
+    });
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js');
     }
@@ -327,11 +464,9 @@ function showPosition(position) {
     locMarker.addTo(map);
     locMarker.bindPopup('You are here')
     locMarker.on('dragend', function (e) {
-        clearMarkers();
         var coords = e.target.getLatLng();
-        initSalaahTimes();
-        getMasjids(coords.lat, coords.lng, 2000)
-        map.flyTo({ lat: coords.lat, lng: coords.lng }, 16)
+        clearMarkers(true);
+        map.flyTo({ lat: coords.lat, lng: coords.lng }, 16);
     });
     initSalaahTimes();
     getMasjids(position.coords.latitude, position.coords.longitude, 2000)
@@ -391,8 +526,8 @@ function getMasjids(lt, ln, radius) {
                     items: [],
                 });
                 if (radius < 20000) {
-                    showAlert(`No masjids found within ${radius / 1000} km. Expanding search radius to ${(radius / 1000) + 3} km`, 2500)
-                    getMasjids(lt, ln, radius + 3000)
+                    showAlert(`No masjids found within ${radius / 1000} km. Expanding search radius to ${(radius / 1000) + 5} km`, 2500)
+                    getMasjids(lt, ln, radius + 5000)
                 }
                 else {
                     showAlert('No masjids found', 3000)
