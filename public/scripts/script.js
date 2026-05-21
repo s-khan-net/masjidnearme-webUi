@@ -31,11 +31,13 @@ var locMarker;
                 if (masjid && masjid.masjidLocation && Array.isArray(masjid.masjidLocation.coordinates)) {
                     var lng = masjid.masjidLocation.coordinates[0];
                     var lat = masjid.masjidLocation.coordinates[1];
+                    var northOffset = 100 / 111320;
+                    var correctedLat = lat + northOffset;
                     if (locMarker && typeof locMarker.setLatLng === 'function') {
-                        locMarker.setLatLng([lat, lng]);
+                        locMarker.setLatLng([correctedLat, lng]);
                     }
                     if (window.map && typeof window.map.flyTo === 'function') {
-                        window.map.flyTo([lat, lng], 16);
+                        window.map.flyTo([correctedLat, lng], 16);
                     }
                     clearMarkers(true);
                 }
@@ -67,6 +69,15 @@ var locMarker;
                 attachResultHandlers();
             }
 
+            function renderLoading() {
+                $(settings.resultsContainer).html(
+                    '<div class="search-loading">' +
+                    '<div class="search-loading-spinner"></div>' +
+                    '<div class="search-loading-text">Searching for masjids...</div>' +
+                    '</div>'
+                );
+            }
+
             function renderNoResults() {
                 renderResults('<div class="no-search-results">No matching masjids found.</div>');
             }
@@ -76,6 +87,7 @@ var locMarker;
             }
 
             function requestSearch(query) {
+                renderLoading();
                 var url = settings.apiBase.replace(/\/$/, '') +
                     '/masjids/search?' +
                     settings.paramName + '=' + encodeURIComponent(query) +
@@ -98,7 +110,8 @@ var locMarker;
                             renderNoResults();
                         }
                     },
-                    error: function () {
+                    error: function (err) {
+                        console.error('Search error:', err);
                         results = [];
                         renderError();
                     }
