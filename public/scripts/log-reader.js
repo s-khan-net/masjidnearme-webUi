@@ -28,28 +28,28 @@ function getLogs() {
 }
 
 function showLogs(data) {
-    $('#logTableBody').empty();
-    let count = data.length;
-    let gridData = []
-    if (data) {
+    let gridData = [];
+    if (Array.isArray(data)) {
         try {
             data.forEach(log => {
                 log = JSON.parse(log);
                 ///build jggrid table
                 gridData.push({ id: log.timestamp, timestamp: log.timestamp, level: log.level, message: log.message });
-                let total_pages = 0;
-                if (count > 0) {
-                    total_pages = Math.ceil(count / 10);
-                } else {
-                    total_pages = 0;
-                }
             });
         }
         catch (e) {
             console.error(e)
         }
 
-        $('#logTable').jqGrid({
+        const $logTable = $('#logTable');
+        if ($logTable[0].grid) {
+            $logTable.jqGrid('clearGridData')
+                .jqGrid('setGridParam', { data: gridData, page: 1 })
+                .trigger('reloadGrid');
+            return;
+        }
+
+        $logTable.jqGrid({
             datatype: "local",
             data: gridData,
             colNames: ['Timestamp', 'Level', 'Message'],
