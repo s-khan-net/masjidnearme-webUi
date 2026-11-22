@@ -36,7 +36,7 @@ function showLogs(data) {
             data.forEach(log => {
                 log = JSON.parse(log);
                 ///build jggrid table
-                gridData.push({ id: log.timestamp, timestamp: log.timestamp, level:log.level, message:log.message });
+                gridData.push({ id: log.timestamp, timestamp: log.timestamp, level: log.level, message: log.message });
                 let total_pages = 0;
                 if (count > 0) {
                     total_pages = Math.ceil(count / 10);
@@ -45,7 +45,7 @@ function showLogs(data) {
                 }
             });
         }
-        catch(e) { 
+        catch (e) {
             console.error(e)
         }
 
@@ -54,11 +54,12 @@ function showLogs(data) {
             data: gridData,
             colNames: ['Timestamp', 'Level', 'Message'],
             colModel: [
-                { name: 'timestamp', index: 'timestamp', width: 150 },
-                { name: 'level', index: 'level', width: 100 },
-                { name: 'message', index: 'message', width: 300 }
+                { name: 'timestamp', index: 'timestamp', width: 60, formatter: formatTimestamp },
+                { name: 'level', index: 'level', width: 25 },
+                { name: 'message', index: 'message', width: 460 }
             ],
             height: 250,
+            autowidth: true,
             rowNum: 10,
             pager: "#logPager",
             viewrecords: true,
@@ -79,4 +80,15 @@ function showLogs(data) {
             </tr>
         `);
     }
+}
+
+function formatTimestamp(value) {
+    const date = new Date(Date(value));
+    if (Number.isNaN(new Date(date).getTime())) {
+        return value == null ? '' : value;
+    }
+
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const pad = part => String(part).padStart(2, '0');
+    return `${pad(date.getDate())} ${months[date.getMonth()]} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
